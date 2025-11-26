@@ -1,0 +1,84 @@
+name: Bank Server MCP
+provider: virtusa
+version: 1.0.0
+description: ''
+logourl: https://qa.helio.virtusa.dev/assets/helio-logo-D6aRgJ4d.svg
+category: bank
+tags: bank,virtusa
+keyfeatures:
+- title: ''
+  description: ''
+- title: ''
+  description: ''
+api_info:
+  type: password
+  authentication: bearer
+  username: pujaagarwal@virtusa.com
+  password: Nextoip@1234
+tools_info:
+- name: token
+  description: ''
+  prompt: ''
+  url: https://sso.dpw.us.virtusa.dev/auth/realms/gtm-Realm/protocol/openid-connect/token
+  method: POST
+  param_info:
+  - name: Authorization
+    group: header
+    value: Basic bWFya2V0cGxhY2UtYmFja2VuZDoyNmJhYmZiMS1mMGRhLTRjMzctOWQ2My1mM2JkMzRmNGY4MmU=
+  - name: Content-Type
+    group: header
+    value: application/x-www-form-urlencoded
+  - name: grant_type
+    group: data-urlencode
+    value: password
+  - name: username
+    group: data-urlencode
+    value: "{{username}}"
+  - name: password
+    group: data-urlencode
+    value: "{{password}}"
+- name: Account Info
+  description: Get the account info for given account Id
+  prompt: ''
+  url: https://smartbank-account.services.dpw.us.virtusa.dev/account/id
+  method: POST
+  param_info:
+  - name: Authorization
+    group: header
+    value: Bearer {{token}}
+  - name: Content-Type
+    group: header
+    value: application/x-www-form-urlencoded
+  - name: accountId
+    group: data-raw
+  - name: id
+    group: param
+- name: Get Balance
+  description: Get the balance for the given account number
+  prompt: ''
+  url: https://smartbank-account.services.dpw.us.virtusa.dev/account-balance/accountNum
+  method: POST
+  param_info:
+  - name: Authorization
+    group: header
+    value: Bearer {{token}}
+  - name: Content-Type
+    group: header
+    value: application/x-www-form-urlencoded
+  - name: accountNum
+    group: data-raw
+- name: Get Account For Name
+  description: Get the account info for given account name
+  prompt: ''
+  url: https://smartbank-account.services.dpw.us.virtusa.dev/accounts/account/accountName
+  method: POST
+  param_info:
+  - name: Authorization
+    group: header
+    value: Bearer {{token}}
+  - name: Content-Type
+    group: header
+    value: application/x-www-form-urlencoded
+  - name: accountName
+    group: data-raw
+mcp_server_prompt: To be added
